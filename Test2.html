@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | GreenCycle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styling for the image slideshow */
+        .image-slideshow {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 1rem;
+        }
+        
+        .slideshow-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .slideshow-image {
+            flex: 0 0 100%;
+            height: 300px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 0.5rem;
+        }
+        
+        .slideshow-nav {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .slideshow-nav button {
+            background: rgba(255,255,255,0.7);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slideshow-nav button:hover {
+            background: rgba(255,255,255,0.9);
+        }
+        
+        @media (max-width: 768px) {
+            .image-slideshow {
+                height: 300px;
+            }
+            
+            .slideshow-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-gray-800 bg-green-50">
+    <!-- Navigation -->
+    <nav class="bg-green-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-leaf text-2xl mr-2"></i>
+                        <span class="text-l font-bold">Glamscrap Technologies<br>Private Limited</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#home"
+                        class="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
+                    <a href="#about"
+                        class="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300">About</a>
+                    <a href="#products"
+                        class="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Products</a>
+                    <a href="#contact"
+                        class="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
+                    <div class="flex space-x-4 ml-4">
+                        <a href="https://facebook.com"
+                            class="text-green-200 hover:text-white transition duration-300"><i
+                                class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com" class="text-green-200 hover:text-white transition duration-300"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com"
+                            class="text-green-200 hover:text-white transition duration-300"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com"
+                            class="text-green-200 hover:text-white transition duration-300"><i
+                                class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button id="menu-btn"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-green-200 hover:text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-green-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-800">Home</a>
+                <a href="#about"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-800">About</a>
+                <a href="#products"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-800">Products</a>
+                <a href="#contact"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-800">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Detail Section -->
+    <section class="py-12 leaf-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Breadcrumb -->
+            <div class="flex items-center text-sm text-green-600 mb-6">
+                <a href="index.html" class="hover:underline">Home</a>
+                <span class="mx-2">/</span>
+                <a href="index.html#products" class="hover:underline">Products</a>
+                <span class="mx-2">/</span>
+                <span class="text-green-800">Recycled Bags</span>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Product Images with Horizontal Slideshow -->
+                <div class="lg:w-1/2">
+                    <!-- Compact Main Image -->
+                    <img id="mainImage"
+                        src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&h=400&q=80"
+                        alt="Recycled Bags" class="w-full h-64 object-cover rounded-lg shadow-lg">
+                                        
+                    <!-- Horizontal Slideshow -->
+                    <div class="image-slideshow bg-green-50 p-2 rounded-lg">
+                        <div class="slideshow-container" id="slideshowContainer">
+                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                alt="Recycled Bags in use" class="slideshow-image" onclick="setMainImage(this)">
+                            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                alt="Recycled Bags close-up" class="slideshow-image" onclick="setMainImage(this)">
+                            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                alt="Recycled Bags variations" class="slideshow-image" onclick="setMainImage(this)">
+                            <img src="https://images.unsplash.com/photo-1601925164819-a4543a90821d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                alt="Recycled Bags different view" class="slideshow-image" onclick="setMainImage(this)">
+                        </div>
+                        <div class="slideshow-nav">
+                            <button onclick="prevSlide()" class="bg-white/80 hover:bg-white p-2 rounded-full">
+                                <i class="fas fa-chevron-left text-green-700"></i>
+                            </button>
+                            <button onclick="nextSlide()" class="bg-white/80 hover:bg-white p-2 rounded-full">
+                                <i class="fas fa-chevron-right text-green-700"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="lg:w-1/2">
+                    <h1 class="text-3xl md:text-4xl font-bold text-green-800 mb-2">Recycled Bags</h1>
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-gray-600 ml-2">(142 reviews)</span>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                        <h2 class="text-xl font-bold text-green-700 mb-4">Product Description</h2>
+                        <p class="text-gray-700 mb-4">
+                            <b>Manufacturing & Materials:</b> 
+                            Our premium recycled bags are crafted from 100% post-consumer waste plastic bags that have been collected, cleaned, and transformed through an innovative upcycling process.
+                            These durable, multipurpose bags give new life to discarded plastic shopping bags, grocery bags, and packaging materials that would otherwise pollute our environment.
+                            Each bag undergoes a specialized manufacturing process that melts down and reforms waste plastic bags into strong, lightweight, and water-resistant material.
+                            The recycled plastic is woven into durable fabric that maintains flexibility while providing exceptional strength for daily use.
+                        </p>
+                        <p class="text-gray-700">
+                            <b> Features & Benefits:</b> 
+                            Perfect for shopping, travel, or everyday carrying needs, these bags feature reinforced stitching and comfortable handles designed to withstand heavy loads. Available in various sizes and colors, our recycled bags can be customized with eco-friendly printing using soy-based inks. The bags feature a protective coating that enhances durability while maintaining their eco-friendly credentials. 
+                            These bags are designed to replace hundreds of single-use plastic bags throughout their lifetime, breaking the cycle of plastic waste and creating a truly circular economy solution.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Environmental Impact Section -->
+            <div class="mt-8 bg-white p-6 rounded-lg shadow-md mb-6">
+                <h2 class="text-xl font-bold text-green-700 mb-4">Environmental Impact</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="eco-benefit bg-green-50 p-4 rounded-lg border border-green-100">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-tint text-green-600 mr-2"></i>
+                            <h3 class="font-semibold">Plastic Waste Reduction</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Each bag is made from approximately 50-75 discarded plastic bags,
+                                preventing them from entering landfills or polluting oceans.</p>
+                    </div>
+                    <div class="eco-benefit bg-green-50 p-4 rounded-lg border border-green-100">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-leaf text-green-600 mr-2"></i>
+                            <h3 class="font-semibold">Carbon Footprint</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Reduces CO2 emissions by 80% compared to
+                                manufacturing new plastic bags from virgin materials.</p>
+                    </div>
+                    <div class="eco-benefit bg-green-50 p-4 rounded-lg border border-green-100">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-tree text-green-600 mr-2"></i>
+                            <h3 class="font-semibold">Resource Conservation</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Uses 70% less energy and 60% less
+                                water in production versus creating new plastic bags</p>
+                    </div>
+                    <div class="eco-benefit bg-green-50 p-4 rounded-lg border border-green-100">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-recycle text-green-600 mr-2"></i>
+                            <h3 class="font-semibold">Circular Economy</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Creates a closed-loop system where waste plastic
+                                bags become new reusable products</p>
+                    </div>
+                    <div class="eco-benefit bg-green-50 p-4 rounded-lg border border-green-100">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-sync-alt text-green-600 mr-2"></i>
+                            <h3 class="font-semibold">Lifetime Impact</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Replaces up to 1,000 single-use plastic bags over its lifespan,
+                                breaking the cycle of plastic waste</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Details Tabs -->
+            <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="border-b border-gray-200">
+                    <nav class="flex -mb-px">
+                        <button id="specs-tab"
+                            class="tab-button active py-4 px-6 text-center border-b-2 font-medium text-sm border-green-500 text-green-600">
+                            Specifications
+                        </button>
+                        <button id="features-tab"
+                            class="tab-button py-4 px-6 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                            Features
+                        </button>
+                        <button id="materials-tab"
+                            class="tab-button py-4 px-6 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                            Materials
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="p-6">
+                    <!-- Specifications Content -->
+                    <div id="specs-content" class="tab-content active">
+                        <table class="w-full">
+                            <tr class="border-b border-gray-200">
+                                <td class="py-2 font-medium">Dimensions</td>
+                                <td class="py-2">Multiple sizes available (Small: 12"x14", Medium: 15"x18", Large: 18"x22")</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-2 font-medium">Weight Capacity</td>
+                                <td class="py-2">Up to 25 lbs depending on size</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-2 font-medium">Handle Type</td>
+                                <td class="py-2">Reinforced fabric handles or backpack straps (depending on model)</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-2 font-medium">Material Thickness</td>
+                                <td class="py-2">1.5mm woven recycled plastic fabric</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-2 font-medium">Water Resistance</td>
+                                <td class="py-2">Water-resistant coating (not fully waterproof)</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-2 font-medium">Recycled Content</td>
+                                <td class="py-2">100% post-consumer recycled plastic</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 font-medium">Manufacturing</td>
+                                <td class="py-2">Ethically produced in our zero-waste facility</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Features Content -->
+                    <div id="features-content" class="tab-content hidden">
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Superior Durability</h3>
+                                    <p class="text-gray-700">Woven recycled plastic fabric provides exceptional strength and tear resistance, outlasting typical reusable bags by 3-5x.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Flexible Storage</h3>
+                                    <p class="text-gray-700">Can be folded or rolled into compact size when not in use, with some models including integrated storage pouches.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Multipurpose Design</h3>
+                                    <p class="text-gray-700">Great for groceries, shopping, travel, beach trips, gym gear, and everyday carrying needs.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Easy Maintenance</h3>
+                                    <p class="text-gray-700">Simply wipe clean with damp cloth or hose down for more thorough cleaning. Air dries quickly.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Customizable</h3>
+                                    <p class="text-gray-700">Available in various colors and prints, with options for custom branding using eco-friendly inks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Materials Content -->
+                    <div id="materials-content" class="tab-content hidden">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-2">Recycled Plastic Source</h3>
+                                <p class="text-gray-700">
+                                    Collected primarily from retail take-back programs and municipal recycling centers. All materials undergo rigorous cleaning and quality control before processing.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-2">Plastic Transformation Process</h3>
+                                <p class="text-gray-700">
+                                    Plastic bags are shredded, melted, and extruded into thin threads that are then woven into durable fabric. Our proprietary process maintains material strength while allowing for design flexibility.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-2">Protective Coating</h3>
+                                <p class="text-gray-700">
+                                    A water-based polyurethane coating provides water resistance without compromising the recyclability of the final product. This coating is free from harmful phthalates and PVC.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-2">Thread & Stitching</h3>
+                                <p class="text-gray-700">
+                                    High-strength recycled polyester thread is used for all stitching, with reinforced stress points at handles and seams for maximum durability.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800 mb-2">End-of-Life Options</h3>
+                                <p class="text-gray-700">
+                                    When the bag eventually wears out, it can be returned to us through our take-back program to be recycled into new products, completing the circular cycle.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="mt-16">
+                <h2 class="text-2xl font-bold text-green-800 mb-8">You Might Also Like</h2>
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Related Product 1 -->
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-lg">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1587463272361-565200f82b33?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                alt="Recycled Pen" class="w-full h-48 object-cover transition duration-300 hover:scale-105">
+                            <div class="absolute top-2 right-2 bg-green-600 text-white text-xs px-2 py-1 rounded-full">
+                                -30% OFF
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg text-green-800 mb-1">Bamboo & Recycled Plastic Pen</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 text-xs ml-1">(87 reviews)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-green-600 font-bold">$8.99</span>
+                                    <span class="text-gray-500 text-sm line-through ml-1">$12.99</span>
+                                </div>
+                                <button class="text-green-600 hover:text-green-800 transition duration-300">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Product 2 -->
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-lg">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                alt="Eco Pencils" class="w-full h-48 object-cover transition duration-300 hover:scale-105">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg text-green-800 mb-1">Plantable Seed Pencils (Set of 12)
+                            </h3>
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-600 text-xs ml-1">(54 reviews)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-green-600 font-bold">$14.99</span>
+                                </div>
+                                <button class="text-green-600 hover:text-green-800 transition duration-300">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Product 3 -->
+                    <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-lg">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1587033411394-37a0099e1d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                alt="Recycled Binder" class="w-full h-48 object-cover transition duration-300 hover:scale-105">
+                            <div class="absolute top-2 right-2 bg-green-600 text-white text-xs px-2 py-1 rounded-full">
+                                NEW
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg text-green-800 mb-1">Recycled Cardboard Binder</h3>
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 text-xs ml-1">(23 reviews)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-green-600 font-bold">$19.99</span>
+                                </div>
+                                <button class="text-green-600 hover:text-green-800 transition duration-300">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-leaf text-2xl text-green-300 mr-2"></i>
+                        <span class="text-xl font-bold">Glamscrap Technologies</span>
+                    </div>
+                    <p class="text-green-200 text-sm">
+                        Glamscrap Technologies Pvt Ltd is a sustainability-driven brand turning waste into eco-friendly alternatives, 
+                        promoting circular economy and inspiring greener choices for a better tomorrow.
+                    </p>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-green-300 hover:text-white transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-green-300 hover:text-white transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-green-300 hover:text-white transition duration-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-green-300 hover:text-white transition duration-300"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Notebooks & Journals</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Writing Instruments</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Office Supplies</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Gift Sets</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Our Story</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Sustainability</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Materials</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Manufacturing</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Contact Us</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">FAQs</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Shipping & Returns</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Size Guide</a></li>
+                        <li><a href="#" class="text-green-300 hover:text-white text-sm transition duration-300">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-green-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-green-300 text-sm mb-4 md:mb-0">
+                    © 2025 Glamscrap Technologies Pvt Ltd. All rights reserved.
+                </p>
+                <div class="flex space-x-4">
+                    <img src="https://via.placeholder.com/40x25?text=VISA" alt="Visa" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=MC" alt="MasterCard" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=AMEX" alt="American Express" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal" class="h-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Horizontal Slideshow functionality
+        const slideshowContainer = document.getElementById('slideshowContainer');
+        const slides = document.querySelectorAll('.slideshow-image');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        
+        function updateSlideshow() {
+            slideshowContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlideshow();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlideshow();
+        }
+
+        // Automatically cycle through slides
+        let slideInterval = setInterval(nextSlide, 3000);
+
+        // Pause automatic sliding on hover/touch
+        const slideshow = document.querySelector('.image-slideshow');
+        slideshow.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        slideshow.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 3000);
+        });
+        slideshow.addEventListener('touchstart', () => clearInterval(slideInterval));
+        slideshow.addEventListener('touchend', () => {
+            slideInterval = setInterval(nextSlide, 3000);
+        });
+
+        // Set main image when clicking on slideshow image
+        function setMainImage(imgElement) {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = imgElement.src;
+            mainImage.alt = imgElement.alt;
+        }
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active', 'text-green-600', 'border-green-500');
+                    btn.classList.add('text-gray-500', 'border-transparent');
+                });
+                tabContents.forEach(content => content.classList.add('hidden'));
+
+                // Add active class to clicked button
+                button.classList.remove('text-gray-500', 'border-transparent');
+                button.classList.add('active', 'text-green-600', 'border-green-500');
+
+                // Show corresponding content
+                const tabId = button.id.replace('-tab', '-content');
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
